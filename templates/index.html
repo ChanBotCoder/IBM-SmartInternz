@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="plotly-div"></div>
+    <div id="plot2"></div>
+
+    <script>
+        // Render Jinja2 variables as JavaScript values
+        var plot = {{ plot|tojson|safe }};
+        var plot2 = {{ plot2|tojson|safe }};
+
+        // Create a new Plotly plot using the data and layout
+        Plotly.newPlot('plotly-div', plot.data, plot.layout);
+        Plotly.newPlot('plot2', plot2.data, plot2.layout);
+    </script>
+</body>
+</html>
