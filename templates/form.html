@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLACEMENT DETAILS📝</title>
+    <link rel="icon" href="{{ url_for('static',filename='sig.jpg')}}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='form.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='nav.css')}}">
+</head>
+<body>
+    <div class="topnav" id="myTopnav">
+        <img src="{{ url_for('static',filename='sig.jpg')}}" alt="">
+        <a style="float:right" href="#news">ABOUTUS</a>
+        <a style="float:right" href="{{ url_for('predict') }}">PREDICTION</a>
+        <a style="float:right" href="{{ url_for('visual') }}">VISUALIZATION</a>
+        <a style="float:right" href="data.html">DATASET</a>
+    </div>
+<center><h1>Select Visualization📊</h1></center>
+   <center><h3> "Visualizing The Future,One Pixel At A Time"</h3></center>
+    <h1 style ="text-align: center;"></h1>
+    <form style ="text-align: center;" action='/visual' method = "POST" enctype="multipart/form-data">  
+    <h3><label for="category" >Select Your Visualization📊:</label></h3>
+<h3> <select style="background-color: #55ACEE; color: white;" id="category" name="select_cat">
+    {% for cat in category %}
+    <option value="{{cat}}" >{{cat|title}}</option>
+    {% endfor %}
+</select></h3>
+    
+    <input type="submit" value="Select">  
+    </form>
+
+    <div class="center-container" id="plot"></div>
+
+    <script>
+        var plot_data = {{ plot|safe }};
+        Plotly.newPlot('plot', plot_data.data, plot_data.layout);
+    </script>
+
+
+</body>
+</html>
